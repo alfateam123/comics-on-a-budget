@@ -2,7 +2,8 @@ Comics on a budget
 -----------
 
 You just can't enter in a bookstore or in a comicstore if you're short on money.
-Debit Comic can help you: insert the maximum price, insert the price of the books/comics you want to buy
+Comics On A Budget can help you: insert the maximum price, insert the 
+price of the books/comics you want to buy
 and this little js application will tell you which books you can buy and which not.
 
 This application is designed with smartphones in mind.
