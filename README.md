@@ -1,4 +1,4 @@
-Debit Comic
+Comics on a budget
 -----------
 
 You just can't enter in a bookstore or in a comicstore if you're short on money.
