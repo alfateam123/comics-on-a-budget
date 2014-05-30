@@ -1,1 +1,8 @@
-#comiclist { background-color: blue }
+.comiclist { background-color: red; }
+.comiclist-hidden { visibility: hidden; }
+
+.inputform { background-color: blue; }
+.inputform-hidden { visibility: hidden; }
+
+.comic-normal {}
+.comic-chosen {background-color: #E08D8D}
