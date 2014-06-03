@@ -31,19 +31,10 @@ var isTestPassed = function(test){
 	}
 	//var conv_options = test.options || {};
 	//var converter = new Showdown.converter(conv_options);
-	if(typeof(test.expected) === "string"){
-		test.got = ComicList.whatICanBuy(test.starting_list);
-		return test.expected === test.got; 
-	}
-	else if(Array.isArray(test.expected)){
-		test.got = [];
+	if(Array.isArray(test.expected)){
 		var result = true;
-		for(var i=0; i<test.expected.length; i++){
-			test.got.push(ComicList.whatICanBuy(test.starting_list[i]));
-			if (compareLists(test.expected[i], test.got[i])) 
-				result = false;
-		}
-		return result;
+		test.got = ComicList.whatICanBuy(test.starting_list) ;
+		return compareLists(test.expected, test.got);
 	}
 	else{
 		return false; //no tests here, can't say it's ok or not

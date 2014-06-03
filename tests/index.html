@@ -1,26 +1,24 @@
 <html>
 <head>
   <meta charset='utf-8'>
-  <title>Tests of md2bbc</title>
+  <title>Tests of comics-on-a-budget</title>
   <script type='text/javascript' src='../src/calculation.js'></script>
   <script type='text/javascript' src='../src/tableHandling.js'></script>
   <script type='text/javascript' src='../src/eventHandling.js'></script>
-  <script type='text/javascript' src='testloader.js'></script>
-  <style type="text/css">
-  .res_true {
-  	background-color: #A0E0B0;
-  }
-  .res_false {
-  	background-color: #F0760D;
-  }
-  </style>
+  <!--<script type='text/javascript' src='../src/testloader.js'></script>-->
+  <script type='text/javascript' src='../deps/qunit/qunit-1.14.0.js'></script>
+  <link href="../deps/qunit/qunit-1.14.0.css" rel="stylesheet" type="text/css">
   <!-- ########## LOAD YOUR TESTS HERE! ############## -->
+  <!--<script type='text/javascript' src='test_qunit.js'></script>-->
   <script type='text/javascript' src='test_calculation_highbudget.js'></script>
+  <script type='text/javascript' src='test_calculation_lowbudget.js'></script>
+  <script type='text/javascript' src='test_calculation_lowerpricefirst.js'></script>
+  <script type='text/javascript' src='test_calculation_higherpricefirst.js'></script>
+  <script type='text/javascript' src='test_comiclist.js'></script>
   <!-- ############ END TEST ZONE #################### -->
 </head>
 <body>
-  <div id='results'>Tests will appear here...</div>
-  <div id='test_info'></div>
-  <script type='text/javascript'>launch_tests();</script>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
 </body>
 </html>
