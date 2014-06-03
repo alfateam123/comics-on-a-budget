@@ -24,8 +24,8 @@ test( "Calculation - Higher price first policy", function() {
 
   //test it!
   deepEqual(
-    [2, 3],
     comiclist.whatICanBuy(max_price)
+    [2, 3]
   );
 });
 
@@ -48,8 +48,8 @@ test( "Calculation - Higher price first policy - No Items", function() {
 
   //test it!
   deepEqual(
-    [],
     comiclist.whatICanBuy(max_price),
+    [],
     "no comics... buy'em all"
   );
 
@@ -80,11 +80,11 @@ test( "Calculation - Higher price first policy - 2high4me", function() {
 
   //test it!
   notDeepEqual(
-    [1,2,3],
-    comiclist.whatICanBuy(max_price, options)
+    comiclist.whatICanBuy(max_price, options),
+    [1,2,3]
   );
   deepEqual(
-    [],
-    comiclist.whatICanBuy(max_price, options)
+    comiclist.whatICanBuy(max_price, options),
+    []
   );
 });

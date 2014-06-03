@@ -23,8 +23,8 @@ test( "Calculation - Lower price first policy", function() {
 
   //test it!
   deepEqual(
-    [1, 3],
-    comiclist.whatICanBuy(max_price)
+    comiclist.whatICanBuy(max_price, options),
+    [1, 3]
   );
 });
 
@@ -38,7 +38,7 @@ test( "Calculation - Lower price first policy", function() {
   ],
   options: {"policy": "lowerpricefirst"}
 }*/
-test( "Calculation - Lower price first policy", function() { 
+test( "Calculation - Lower price first policy - No items", function() { 
   //test data
   var comiclist = new ComicList();
   var max_price = 15;
@@ -46,8 +46,8 @@ test( "Calculation - Lower price first policy", function() {
 
   //test it!
   deepEqual(
-    [],
-    comiclist.whatICanBuy(max_price)
+    comiclist.whatICanBuy(max_price, options),
+    []
   );
 });
 
@@ -65,7 +65,7 @@ test( "Calculation - Lower price first policy", function() {
   options: {"policy": "lowerpricefirst"}
 }
 */
-test( "Calculation - Lower price first policy", function() { 
+test( "Calculation - Lower price first policy - 2high4me", function() { 
   //test data
   var comiclist = new ComicList();
   comiclist.addComic(new Comic('Complete Evangelion Box', 40.40));
@@ -76,7 +76,7 @@ test( "Calculation - Lower price first policy", function() {
 
   //test it!
   deepEqual(
-    [],
-    comiclist.whatICanBuy(max_price)
+    comiclist.whatICanBuy(max_price, options),
+    []
   );
 });

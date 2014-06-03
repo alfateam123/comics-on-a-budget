@@ -9,8 +9,8 @@ test( "Calculation - Low Budget", function() {
 
   //test it!
   deepEqual(
-    new Array(),
     comiclist.whatICanBuy(max_price),
+    new Array(),
     "even if no policy if specified, you can't afford a comic."
   );
 });
@@ -22,8 +22,8 @@ test( "Calculation - Low Budget - No Items", function() {
 
   //test it!
   deepEqual(
-    comiclist.comics, 
-    comiclist.whatICanBuy(max_price)
+    comiclist.whatICanBuy(max_price),
+    comiclist.comics
   );
 });
 
@@ -38,8 +38,8 @@ test( "Calculation - Low Budget - Lower first", function() {
 
   //test it!
   deepEqual(
-    new Array(),
-    comiclist.whatICanBuy(max_price, options)
+    comiclist.whatICanBuy(max_price, options),
+    new Array()
   );
 });
 
@@ -54,8 +54,8 @@ test( "Calculation - Low Budget - Higher first", function() {
 
   //test it!
   deepEqual(
-    new Array(),
-    comiclist.whatICanBuy(max_price, options)
+    comiclist.whatICanBuy(max_price, options),
+    new Array()
   );
 });
 

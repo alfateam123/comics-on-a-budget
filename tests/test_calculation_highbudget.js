@@ -8,8 +8,8 @@ test( "Calculation - High Budget", function() {
 
   //test it!
   deepEqual(
-    comiclist.comics,
     comiclist.whatICanBuy(max_price),
+    [1,2,3],
     "Regardless of the policy, you can buy'em all!"
   );
 });
@@ -21,8 +21,8 @@ test( "Calculation - High Budget - No Items", function() {
 
   //test it!
   deepEqual(
-    comiclist.comics,
     comiclist.whatICanBuy(max_price),
+    comiclist.comics,
     "no comics... buy'em all"
   );
 
@@ -39,8 +39,8 @@ test( "Calculation - High Budget - Lower first", function() {
 
   //test it!
   deepEqual(
-    comiclist.comics,
-    comiclist.whatICanBuy(max_price, options)
+    comiclist.whatICanBuy(max_price, options),
+    [1,3,2]
   );
 });
 
@@ -55,7 +55,7 @@ test( "Calculation - High Budget - Higher first", function() {
 
   //test it!
   deepEqual(
-    comiclist.comics,
-    comiclist.whatICanBuy(max_price, options)
+    comiclist.whatICanBuy(max_price, options),
+    [2,3,1]
   );
 });
