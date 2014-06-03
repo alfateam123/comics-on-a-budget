@@ -38,10 +38,19 @@ Table.prototype.generateRow = function(index, comicData){
 	return row;
 }
 
+Table.prototype.generateHeader = function(){
+	var thead = document.createElement("thead");
+	thead.appendChild(this.generateRow('head',
+		{'Comic': '<b>Comic</b>', "Price": "<b>Price</b>", "Chosen": "<b>Chosen</b>"}
+		)
+	)
+	return thead;
+}
+
 Table.prototype.generateTable = function(highlight_chosen){
 	//cleaning the table
 	document.getElementById("comiclist").innerHTML = "";
-	document.getElementById("comiclist").className = "comiclist";
+	document.getElementById("comiclist").className = "table-responsive";
 	document.getElementById("inputform").className = "inputform-hidden";
 
     //calculate
@@ -51,7 +60,8 @@ Table.prototype.generateTable = function(highlight_chosen){
 	}
 
 	var table = document.createElement("table");
-
+	table.className = 'table';
+	table.appendChild(this.generateHeader());
 	for (var i = 0; i < comics.length; i++) {
 		table.appendChild(this.generateRow(i, comics[i]));
 		if(indexesToHighlight.indexOf(i)!=-1)

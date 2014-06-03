@@ -26,3 +26,8 @@ var onInsertComicClick = function(){
   console.log("this is the new comic!", newComic);
   table.addRow(newComic);
 }
+
+var onInsertBackClick = function(){
+  document.getElementById("comiclist").className = 'table-responsive';
+  document.getElementById("inputform").className = 'inputform-hidden';
+}
