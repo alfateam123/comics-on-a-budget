@@ -1,3 +1,10 @@
+/*
+Every event that can be raised from the view (index.html, CoaB is a single page app)
+will be handled in this file.
+*/
+
+var table = new Table();
+
 var onAddItemClick = function(){
   document.getElementById("comiclist").className='comiclist-hidden';
   document.getElementById("inputform").className='inputform';
@@ -15,7 +22,7 @@ var onInsertComicClick = function(){
   console.log("inserting a new comic!");
   var newComicName = document.getElementById("comicname").value;
   var newComicPrice = document.getElementById("comicprice").value;
-  var newComic = Comic(newComicName, Number(newComicPrice));
+  var newComic = new Comic(newComicName, Number(newComicPrice));
   console.log("this is the new comic!", newComic);
-  Table.addRow(newComic);
+  table.addRow(newComic);
 }
