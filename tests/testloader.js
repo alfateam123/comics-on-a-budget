@@ -33,8 +33,8 @@ var isTestPassed = function(test){
 	//var converter = new Showdown.converter(conv_options);
 	if(Array.isArray(test.expected)){
 		var result = true;
-		test.got = ComicList.whatICanBuy(test.starting_list[i]) ;
-		return compareLists(test.expected[i], test.got[i]);
+		test.got = ComicList.whatICanBuy(test.starting_list) ;
+		return compareLists(test.expected, test.got);
 	}
 	else{
 		return false; //no tests here, can't say it's ok or not
