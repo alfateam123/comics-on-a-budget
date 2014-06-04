@@ -2,11 +2,11 @@
 The calculation functions are in this file.
 */
 
-var Comic = function(comic_name, comic_price, selected){
+var Comic = function(comic_name, comic_price, necessary){
     //return {name: comic_name, price: comic_price};
     this.name = comic_name;
     this.price = comic_price;
-    this.selected = selected || false;
+    this.necessary = necessary || false;
 };
 
 var ComicList =function(comics){
@@ -32,6 +32,10 @@ ComicList.prototype.removeComicByIndex = function(indexToRemove){
 ComicList.prototype.getAllComics = function(){
     return this.comics;
 };
+
+ComicList.prototype.toggleComicSelectionByIndex = function(indexToSelect){
+    this.comics[indexToSelect].necessary = !this.comics[indexToSelect].necessary;
+}
 
 ComicList.prototype.whatICanBuy = function(maxPrice, options){
     //RETURNS: a list of indexes [0, comics.length)
@@ -62,7 +66,7 @@ ComicList.prototype.whatICanBuy = function(maxPrice, options){
     for (var i = 0; i < clist.length; i++) {
         //console.log("[whatICanBuy] clist["+i+"]", clist[i]);
         if(maxPrice - clist[i].comic.price >= 0){
-            maxPrice = maxPrice - clist[i].comic.price; //buh. var x=1000; x =- 15 ===> x == (-15)
+            maxPrice -= clist[i].comic.price;
             comicIndexes.push(clist[i].index);
         //    console.log("[whatICanBuy] oh, we added a comic!", clist[i], maxPrice);
         }

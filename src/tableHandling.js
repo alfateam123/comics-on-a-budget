@@ -13,27 +13,37 @@ Table.prototype.addRow = function(comicData){
 }
 
 Table.prototype.removeRow = function(rowNumber){
-	this.comiclist.removeComic(rowNumber);
+	this.comiclist.removeComicByIndex(rowNumber-1);
 	this.generateTable(false);
-}
-
-Table.prototype.highlightRow = function(rowNumber){
-	document.getElementById("comic"+rowNumber).className = 'comic-chosen';
 }
 
 Table.prototype.resetTable = function(){
 	this.generateTable(false);
 }
 
+Table.prototype.toggleRowSelection = function(index){
+	this.comiclist.toggleComicSelectionByIndex(index-1);
+	this.generateTable(false);
+}
+
 Table.prototype.generateRow = function(index, comicData){
 	var row = document.createElement("tr");
 	row.id = 'comic'+index;
-	row.className = 'comic-normal';
+	row.className = comicData.necessary?"comic-selected":'comic-normal';
 	for(key in comicData){
 		var td = document.createElement("td");
-		td.innerHTML = comicData[key];
+		/*if(key === 'necessary')
+			td.innerHTML = "<input type=checkbox onclick='onNecessaryClick("+index+")' checked="+(comicData.necessary)+" />";
+		else*/
+			td.innerHTML = comicData[key];
 		td.id = key+index;
 		row.appendChild(td);
+	}
+	//adding the "remove row" button
+	if(!isNaN(index)){
+		var deleteItButton = document.createElement("td");
+		deleteItButton.innerHTML = "<input class=\"btn btn-default\" type=\"button\" value=\"&#10006;\" onclick=\"onRemoveItemClick("+index+");\" />";
+		row.appendChild(deleteItButton);
 	}
 	return row;
 }
@@ -41,31 +51,38 @@ Table.prototype.generateRow = function(index, comicData){
 Table.prototype.generateHeader = function(){
 	var thead = document.createElement("thead");
 	thead.appendChild(this.generateRow('head',
-		{'Comic': '<b>Comic</b>', "Price": "<b>Price</b>", "Chosen": "<b>Chosen</b>"}
+		{'Comic': '<b>Comic</b>', "Price": "<b>Price</b>", "Necessary": "<b>Necessary</b>", "Remove": "<b>Remove</b>"}
 		)
 	)
 	return thead;
 }
 
-Table.prototype.generateTable = function(highlight_chosen){
+Table.prototype.generateTable = function(highlight_whattobuy){
 	//cleaning the table
 	document.getElementById("comiclist").innerHTML = "";
-	document.getElementById("comiclist").className = "table-responsive";
-	document.getElementById("inputform").className = "inputform-hidden";
 
     //calculate
 	var comics=this.comiclist.getAllComics(), indexesToHighlight=[];
-	if(highlight_chosen){
-		indexesToHighlight = this.comiclist.whatCanIBuy(Number(document.getElementById('maxprice').value));	
+	var maxprice = Number(document.getElementById('maxprice').value); 
+	if(highlight_whattobuy){
+		indexesToHighlight = this.comiclist.whatICanBuy(maxprice);	
+		console.log("highlight_whattobuy, indexesToHighlight:", indexesToHighlight);
 	}
-
-	var table = document.createElement("table");
-	table.className = 'table';
-	table.appendChild(this.generateHeader());
-	for (var i = 0; i < comics.length; i++) {
-		table.appendChild(this.generateRow(i, comics[i]));
-		if(indexesToHighlight.indexOf(i)!=-1)
-			this.highlightRow(i);
+	if(this.comiclist.getAllComics().length){
+		var table = document.createElement("table");
+		table.className = 'table table-bordered';
+		table.appendChild(this.generateHeader());
+		for (var i = 0; i < comics.length; i++) {
+			var row_ = this.generateRow(i+1, comics[i]);
+			console.log(row_);
+			table.appendChild(row_);
+		}
+	}
+	else
+	{
+		var table= document.createElement("p");
+		table.style = 'text-align: center';
+		table.innerHTML = "No comics here! <br />Insert a new one by clicking \"New Comic\" button!";
 	}
 
 	document.getElementById("comiclist").appendChild(table);
