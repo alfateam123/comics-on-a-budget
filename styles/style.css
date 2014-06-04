@@ -5,5 +5,6 @@
 .inputform-hidden { visibility: hidden; }
 
 .comic-normal {}
-.comic-selected {background-color: #D9EDF7;}
+/*.comic-selected {background-color: #D9EDF7;}*/
+.comic-selected {background-color: #5DD867;}
 /*.comic-toohigh {background-color: #F2DEDE;}*/

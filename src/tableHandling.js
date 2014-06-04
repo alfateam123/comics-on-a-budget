@@ -74,6 +74,8 @@ Table.prototype.generateTable = function(highlight_whattobuy){
 		table.appendChild(this.generateHeader());
 		for (var i = 0; i < comics.length; i++) {
 			var row_ = this.generateRow(i+1, comics[i]);
+			if(indexesToHighlight.indexOf(i+1) != -1)
+				row_.className = 'comic-selected';
 			console.log(row_);
 			table.appendChild(row_);
 		}
