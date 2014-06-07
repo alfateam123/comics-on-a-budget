@@ -1,24 +1,95 @@
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset='utf-8' />
+  <meta name="viewport" content="user-scalable=no">
   <title>Comics on a Budget</title>
-  <link href="style.css" rel="stylesheet" type="text/css">
+  <!-- loading dependencies -->
+  <link href="./deps/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="./deps/bootstrap/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src='deps/bootstrap/bootstrap.js'></script>
+  <!-- loading app-only files -->
+  <link href="./styles/style.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src='src/calculation.js'></script>
   <script type="text/javascript" src='src/tableHandling.js'></script>
   <script type="text/javascript" src='src/eventHandling.js'></script>
 </head>
 <body>
-  <input type='number' id='maxprice' value="15.00" step='0.1' min='0' />
-  <div class='comiclist' id='comiclist'>
-  asdad
+    <ul class="nav nav-tabs">
+      <li id="navtab_list" class="active"><a href="#" onclick="showTabContent('list')">List</a></li>
+      <li id="navtab_newcomic"><a href="#" onclick="showTabContent('newcomic')">New Comic</a></li>
+      <li id="navtab_settings"><a href="#" onclick="showTabContent('settings')">Settings</a></li>
+      <li id="navtab_about"><a href="#" onclick="showTabContent('about')">About</a></li>
+    </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tabcontent_list">
+      <div align="center">
+      <input type='number' id='maxprice' value="35.00" step='0.1' min='0' />
+      <input class="btn btn-default" type="button" value="What can I afford?" onclick="onAffordClick();" />
+      <input class="textbox" id='selectedprice' style="display: none" />
+      <br />
+      </div>
+      <div class="table-responsive" id='comiclist'>
+        <p style='text-align:center'>No comics here! <br />Insert a new one by clicking "New Comic" button!</p>
+      </div>
+    </div>
+    <div class="tab-pane" id="tabcontent_newcomic" align="center">
+      <div class="input-group">
+        <input type="text" id="comicname" placeholder="comic name"/>
+        <input type="number" id="comicprice" value="4.40" step="0.1" min="0"/>
+      </div>
+      <div class="btn-group"> 
+        <input class="btn btn-default" type="button" value="Insert!" onclick="onInsertComicClick();" />
+        <input class="btn btn-default" type="button" value="Reset" onclick="onInsertResetClick();" />
+        <input class="btn btn-default" type="button" value="Back" onclick="onInsertBackClick();" />
+      </div>
+    </div>
+    <div class="tab-pane" id="tabcontent_settings">
+      Comic selection policy
+      <select class="form-control" id="policyselector" onchange="onPolicySelected(this.selectedIndex)">
+        <option value="nopolicy">No policy</option>
+        <option value="lowerpricefirst">Lower price first</option>
+        <option value="higherpricefirst">Higher price first</option>
+      </select>
+      <div class="explanation-shown" id="policyexplanation_nopolicy">
+        <p>If I can grab it, I'll grab it. The app will choose any item it can buy, according to the insertion order</p>
+      </div>
+      <div class="explanation-hidden" id="policyexplanation_lowerpricefirst">
+        <p>The app will choose the comics which has the lower cost, it will stop when the budget it reached.</p>
+      </div>
+      <div class="explanation-hidden" id="policyexplanation_higherpricefirst">
+        <p>The app will choose the comics which has the higher cost, it will stop when the budget it reached.</p>
+      </div>
+      <!--<div class="checkbox">
+        <label>
+          <input type="checkbox" id="notconsidernecessarycomics" value="">
+          Don't consider <i>necessary</i> comics in the calculation
+        </label>
+      </div>-->
+    </div>
+    <div class="tab-pane" id="tabcontent_about">
+      <p>
+        Oh, hi. This is <a href="http://github.com/alfateam123/comics-on-a-budget">Comics on a Budget</a>.<br />
+        How to use it:
+        <ol>
+        <li>click on New Comic</li>
+        <li>insert the comic name and price of the comic you want to buy</li>
+        <li>click the "Insert!" button</li>
+        <li>repeat</li>
+        <li>set the price and click "What can I afford?"</li>
+        </ol>
+        The selected lines are the comics you can buy, staying in budget.<br /><br />
+        Thank you for using this software: if you like it (or don't), if you find a bug (or want to suggest an enhancement), just open an issue on the project's issue tracker.<br />
+        We hope this webapp is what you're looking for. If you're looking for drones... we can't help you.
+      </p>
+    </div>
   </div>
-  <div class='inputform-hidden' id='inputform'>
-	<form>
-	  <input type="text" id="comicname" value="comic name" />
-	  <input type="number" id="comicprice" value="4.40" step="0.1" min="0"/>
-	  <input type="button" value="insert!" onclick="onInsertComicClick();" />
-	</form>
-  </div>
-  <input type='button' value='add item' onclick='onAddItemClick();' />
+  <script>
+  //creating some comics, as an example
+  table.comiclist.addComic(new Comic("Medaka Box #22", 4.40));
+  table.comiclist.addComic(new Comic("Watchmen - Vertigo", 25));
+  table.comiclist.addComic(new Comic("Spice and Wolf #9", 6.50));
+  table.addRow(new Comic("Strike the Blood - Box 1", 50));
+  </script>
 </body>
 </html>

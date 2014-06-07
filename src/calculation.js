@@ -6,7 +6,7 @@ var Comic = function(comic_name, comic_price, selected){
     //return {name: comic_name, price: comic_price};
     this.name = comic_name;
     this.price = comic_price;
-    this.selected = selected || false;
+    this.selected = typeof(selected)!=='undefined' ? selected : false;
 };
 
 var ComicList =function(comics){
@@ -33,8 +33,31 @@ ComicList.prototype.getAllComics = function(){
     return this.comics;
 };
 
+ComicList.prototype.toggleComicSelectionByIndex = function(indexToSelect){
+    this.comics[indexToSelect].selected = !this.comics[indexToSelect].selected;
+}
+
+ComicList.prototype.totalPrice = function() {
+    return this.comics.reduce(function(sum_, comic){return sum_+comic.price;}, 0);
+};
+
+ComicList.prototype.selectedPrice = function() {
+    return this.comics.reduce(function(sum_, comic){return sum_+(comic.selected?comic.price:0);}, 0);
+};
+
 ComicList.prototype.whatICanBuy = function(maxPrice, options){
     //RETURNS: a list of indexes [0, comics.length)
+    if(!options){
+        //retrieve options
+        return this.whatICanBuy(
+            maxPrice,
+            {
+                policy: document.getElementById("policyselector").value,
+                notconsidernecessarycomics: false
+            }
+            )
+
+    }
 
     var comicsWithIndex = function(comics){
         var cwi = new Array();
@@ -62,9 +85,9 @@ ComicList.prototype.whatICanBuy = function(maxPrice, options){
     for (var i = 0; i < clist.length; i++) {
         //console.log("[whatICanBuy] clist["+i+"]", clist[i]);
         if(maxPrice - clist[i].comic.price >= 0){
-            maxPrice = maxPrice - clist[i].comic.price; //buh. var x=1000; x =- 15 ===> x == (-15)
+            maxPrice -= clist[i].comic.price;
             comicIndexes.push(clist[i].index);
-        //    console.log("[whatICanBuy] oh, we added a comic!", clist[i], maxPrice);
+            //console.log("[whatICanBuy] oh, we added a comic!", clist[i], maxPrice);
         }
     };
 

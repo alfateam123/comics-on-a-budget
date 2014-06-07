@@ -5,18 +5,26 @@ will be handled in this file.
 
 var table = new Table();
 
-var onAddItemClick = function(){
-  document.getElementById("comiclist").className='comiclist-hidden';
-  document.getElementById("inputform").className='inputform';
+//############################ COMIC LIST #######################
+
+var onRemoveItemClick = function(rowIndex){
+  console.log("wanna remove the item "+rowIndex);
+  table.removeRow(rowIndex);
 }
 
-var onRemoveItemClick = function(itempos){
-  alert("wanna remove the item "+itempos);
+var onAffordClick = function(){
+  console.log("clicked onAffordClick");
+  table.generateTable(true); //show the highlighted ones
 }
 
-var onHighligthItemsClick = function(){
-  alert("starting calculation. why not going on wikipedia and reading about Turing machines?");
+var onSelectedComicClick = function(rowIndex){
+  table.comiclist.toggleComicSelectionByIndex(rowIndex-1);
+  document.getElementById("selectedprice").style = "";
+  document.getElementById("selectedprice").value = table.comiclist.selectedPrice();
 }
+
+//######################## END COMIC LIST #######################
+//############################## NEW COMIC ######################
 
 var onInsertComicClick = function(){
   console.log("inserting a new comic!");
@@ -25,4 +33,46 @@ var onInsertComicClick = function(){
   var newComic = new Comic(newComicName, Number(newComicPrice));
   console.log("this is the new comic!", newComic);
   table.addRow(newComic);
+  //after the insertion of the new comic, we want to show the updated table
+  showTabContent('list');
+}
+
+var onInsertResetClick = function(){
+  document.getElementById("comicname").value="";
+  document.getElementById("comicprice").value=4.40;
+}
+
+var onInsertBackClick = function(){
+  showTabContent('list');
+}
+
+// ################### END NEW COMIC ###################################
+// ################### SETTINGS ########################################
+
+var onPolicySelected = function(policyindex){
+  //return null;
+
+  console.log("[onPolicySelected] policyindex: ", policyindex);
+  var policyoptions = document.getElementById("policyselector").options;
+  //console.log(policyoptions);
+  console.log(policyoptions.length);
+  for(var i=0; i<policyoptions.length; i++){
+    //console.log(i, policyoptions[i], "policyexplanation_"+policyoptions[i].value);
+    console.log(document.getElementById("policyexplanation_"+policyoptions[i].value));
+    document.getElementById("policyexplanation_"+(policyoptions[i].value)).className = (i === policyindex)? 'explanation-shown' : "explanation-hidden";
+    console.log(document.getElementById("policyexplanation_"+policyoptions[i].value).className);
+  }
+}
+
+// ################### END SETTINGS #####################################
+
+//functions needed to show different the comic table or the new comic insertion form
+var tab_suffixes = ['list', 'newcomic', 'about', 'settings'];
+var showTabContent = function(tabname){
+  for(var i=0; i<tab_suffixes.length; i++)
+  {
+    var suff = tab_suffixes[i];
+    document.getElementById("tabcontent_"+suff).className="tab-pane" + (suff===tabname?" active":"");
+    document.getElementById("navtab_"+suff).className= suff===tabname?"active":"";
+  }
 }
