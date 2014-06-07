@@ -17,8 +17,10 @@ var onAffordClick = function(){
   table.generateTable(true); //show the highlighted ones
 }
 
-var onNecessaryClick = function(rowIndex){
-  table.toggleRowSelection(rowIndex);
+var onSelectedComicClick = function(rowIndex){
+  table.comiclist.toggleComicSelectionByIndex(rowIndex-1);
+  document.getElementById("selectedprice").style = "";
+  document.getElementById("selectedprice").value = table.comiclist.selectedPrice();
 }
 
 //######################## END COMIC LIST #######################
@@ -45,7 +47,22 @@ var onInsertBackClick = function(){
 }
 
 // ################### END NEW COMIC ###################################
+// ################### SETTINGS ########################################
 
+var onPolicySelected = function(policyindex){
+  return null;
+
+  console.log("[onPolicySelected] policyindex: ", policyindex);
+  var policyoptions = document.getElementById("policyselector").options;
+  //console.log(policyoptions);
+  for(var i=0; i<policyoptions.length; i++)
+    //console.log(i, policyoptions[i], "policyexplanation_"+policyoptions[i].value);
+    console.log(document.getElementById("policyexplanation_"+policyoptions[i].value));
+    document.getElementById("policyexplanation_"+policyoptions[i].value).className = (i === policyindex)? 'explanation-shown' : "explanation-hidden";
+    console.log(document.getElementById("policyexplanation_"+policyoptions[i].value).className);
+}
+
+// ################### END SETTINGS #####################################
 
 //functions needed to show different the comic table or the new comic insertion form
 var tab_suffixes = ['list', 'newcomic', 'about', 'settings'];

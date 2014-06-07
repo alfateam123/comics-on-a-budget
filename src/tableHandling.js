@@ -23,18 +23,20 @@ Table.prototype.resetTable = function(){
 
 Table.prototype.toggleRowSelection = function(index){
 	this.comiclist.toggleComicSelectionByIndex(index-1);
-	this.generateTable(false);
+	//this.generateTable(false);
 }
 
 Table.prototype.generateRow = function(index, comicData){
 	var row = document.createElement("tr");
 	row.id = 'comic'+index;
-	row.className = comicData.necessary?"comic-selected":'comic-normal';
+	//row.className =comicData.selected?"comic-selected":'comic-normal';
 	for(key in comicData){
 		var td = document.createElement("td");
-		/*if(key === 'necessary')
-			td.innerHTML = "<input type=checkbox onclick='onNecessaryClick("+index+")' checked="+(comicData.necessary)+" />";
-		else*/
+		if(key === 'selected'){
+			td.innerHTML = "<input type=checkbox onclick='onSelectedComicClick("+index+")' />";
+			td.children[0].checked = comicData.selected;
+		}
+		else
 			td.innerHTML = comicData[key];
 		td.id = key+index;
 		row.appendChild(td);

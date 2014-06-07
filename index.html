@@ -15,23 +15,25 @@
   <script type="text/javascript" src='src/eventHandling.js'></script>
 </head>
 <body>
-  <div>
     <ul class="nav nav-tabs">
       <li id="navtab_list" class="active"><a href="#" onclick="showTabContent('list')">List</a></li>
       <li id="navtab_newcomic"><a href="#" onclick="showTabContent('newcomic')">New Comic</a></li>
       <li id="navtab_settings"><a href="#" onclick="showTabContent('settings')">Settings</a></li>
       <li id="navtab_about"><a href="#" onclick="showTabContent('about')">About</a></li>
     </ul>
-  </div>
   <div class="tab-content">
     <div class="tab-pane active" id="tabcontent_list">
-      <input type='number' id='maxprice' value="15.00" step='0.1' min='0' />
-      <input class="btn btn-default" type="button" value="What can I afford?" onclick="onAffordClick();" /><br />
+      <div align="center">
+      <input type='number' id='maxprice' value="35.00" step='0.1' min='0' />
+      <input class="btn btn-default" type="button" value="What can I afford?" onclick="onAffordClick();" />
+      <input class="textbox" id='selectedprice' style="display: none" />
+      <br />
+      </div>
       <div class="table-responsive" id='comiclist'>
         <p style='text-align:center'>No comics here! <br />Insert a new one by clicking "New Comic" button!</p>
       </div>
     </div>
-    <div class="tab-pane" id="tabcontent_newcomic">
+    <div class="tab-pane" id="tabcontent_newcomic" align="center">
       <div class="input-group">
         <input type="text" id="comicname" placeholder="comic name"/>
         <input type="number" id="comicprice" value="4.40" step="0.1" min="0"/>
@@ -43,22 +45,51 @@
       </div>
     </div>
     <div class="tab-pane" id="tabcontent_settings">
-      Comic selection policy<select class="form-control" id="policyselector">
+      Comic selection policy
+      <select class="form-control" id="policyselector" onchange="onPolicySelected(this.selectedIndex)">
         <option value="nopolicy">No policy</option>
         <option value="lowerpricefirst">Lower price first</option>
         <option value="higherpricefirst">Higher price first</option>
       </select>
-      <div class="checkbox">
+      <div class="explanation-hidden" id="policyexplanation_nopolicy">
+        <p>If I can grab it, I'll grab it. The app will choose any item it can buy, according to the insertion order</p>
+      </div>
+      <div class="explanation-hidden" id="policyexplanation_lowerpricefirst">
+        <p>The app will choose the comics which has the lower cost, it will stop when the budget it reached.</p>
+      </div>
+      <div class="explanation-hidden" id="policyexplanation_higherpricefirst">
+        <p>The app will choose the comics which has the higher cost, it will stop when the budget it reached.</p>
+      </div>
+      <!--<div class="checkbox">
         <label>
           <input type="checkbox" id="notconsidernecessarycomics" value="">
           Don't consider <i>necessary</i> comics in the calculation
         </label>
-      </div>
+      </div>-->
     </div>
     <div class="tab-pane" id="tabcontent_about">
-      Oh, hi. Fork this project <a href='https://github.com/alfateam123/comics-on-a-budget'>on github</a>.
-      In case you find a bug, or need help, just open an issue in the Github page.
+      <p>
+        Oh, hi. This is <a href="http://github.com/alfateam123/comics-on-a-budget">Comics on a Budget</a>.<br />
+        How to use it:
+        <ol>
+        <li>click on New Comic</li>
+        <li>insert the comic name and price of the comic you want to buy</li>
+        <li>click the "Insert!" button</li>
+        <li>repeat</li>
+        <li>set the price and click "What can I afford?"</li>
+        </ol>
+        The selected lines are the comics you can buy, staying in budget.<br /><br />
+        Thank you for using this software: if you like it (or don't), if you find a bug (or want to suggest an enhancement), just open an issue on the project's issue tracker.<br />
+        We hope this webapp is what you're looking for. If you're looking for drones... we can't help you.
+      </p>
     </div>
   </div>
+  <script>
+  //creating some comics, as an example
+  table.comiclist.addComic(new Comic("Medaka Box #22", 4.40));
+  table.comiclist.addComic(new Comic("Watchmen - Vertigo", 25));
+  table.comiclist.addComic(new Comic("Spice and Wolf #9", 6.50));
+  table.addRow(new Comic("Strike the Blood - Box 1", 50));
+  </script>
 </body>
 </html>
