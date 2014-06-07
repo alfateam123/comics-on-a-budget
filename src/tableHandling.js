@@ -23,7 +23,6 @@ Table.prototype.resetTable = function(){
 
 Table.prototype.toggleRowSelection = function(index){
 	this.comiclist.toggleComicSelectionByIndex(index-1);
-	//this.generateTable(false);
 }
 
 Table.prototype.generateRow = function(index, comicData){
@@ -53,7 +52,7 @@ Table.prototype.generateRow = function(index, comicData){
 Table.prototype.generateHeader = function(){
 	var thead = document.createElement("thead");
 	thead.appendChild(this.generateRow('head',
-		{'Comic': '<b>Comic</b>', "Price": "<b>Price</b>", "Necessary": "<b>Necessary</b>", "Remove": "<b>Remove</b>"}
+		{'Comic': '<b>Comic</b>', "Price": "<b>Price</b>", "partialsum": "<b>Partial Sum</b>", "Remove": "<b>Remove</b>"}
 		)
 	)
 	return thead;
