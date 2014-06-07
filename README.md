@@ -8,6 +8,12 @@ and this little js application will tell you which books you can buy and which n
 
 This application is designed with smartphones in mind.
 
+Live Demo?
+---------
+
+<http://alfateam123.niggazwithattitu.de/nonchosoldi/>  
+I suggest you to try the webapp with a phone or a tablet.
+
 Do I need an yolo-uber-octaphone to run it?
 ------------
 
