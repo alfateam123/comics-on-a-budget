@@ -52,11 +52,10 @@ ComicList.prototype.whatICanBuy = function(maxPrice, options){
         return this.whatICanBuy(
             maxPrice,
             {
-                policy: document.getElementById("policyselector").value,
+                policy: "nopolicy",
                 notconsidernecessarycomics: false
             }
-            )
-
+            );
     }
 
     var comicsWithIndex = function(comics){
