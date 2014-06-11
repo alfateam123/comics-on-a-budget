@@ -1,9 +1,13 @@
 /*.comiclist { background-color: red; }*/
 .comiclist-hidden { visibility: hidden; }
 
-.inputform { background-color: ; }
+.inputform {}
 .inputform-hidden { visibility: hidden; }
 
 .comic-normal {}
-.comic-selected {background-color: #D9EDF7;}
+/*.comic-selected {background-color: #D9EDF7;}*/
+.comic-selected {background-color: #5DD867;}
 /*.comic-toohigh {background-color: #F2DEDE;}*/
+
+.explanation-shown {display: block;}
+.explanation-hidden {display: none; }

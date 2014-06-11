@@ -62,18 +62,19 @@ Table.prototype.resetTable = function(){
 
 Table.prototype.toggleRowSelection = function(index){
 	this.comiclist.toggleComicSelectionByIndex(index-1);
-	this.generateTable(false);
 }
 
 Table.prototype.generateRow = function(index, comicData){
 	var row = document.createElement("tr");
 	row.id = 'comic'+index;
-	row.className = comicData.necessary?"comic-selected":'comic-normal';
+	//row.className =comicData.selected?"comic-selected":'comic-normal';
 	for(key in comicData){
 		var td = document.createElement("td");
-		/*if(key === 'necessary')
-			td.innerHTML = "<input type=checkbox onclick='onNecessaryClick("+index+")' checked="+(comicData.necessary)+" />";
-		else*/
+		if(key === 'selected'){
+			td.innerHTML = "<input type=checkbox onclick='onSelectedComicClick("+index+")' />";
+			td.children[0].checked = comicData.selected;
+		}
+		else
 			td.innerHTML = comicData[key];
 		td.id = key+index;
 		row.appendChild(td);
@@ -90,7 +91,7 @@ Table.prototype.generateRow = function(index, comicData){
 Table.prototype.generateHeader = function(){
 	var thead = document.createElement("thead");
 	thead.appendChild(this.generateRow('head',
-		{'Comic': '<b>Comic</b>', "Price": "<b>Price</b>", "Necessary": "<b>Necessary</b>", "Remove": "<b>Remove</b>"}
+		{'Comic': '<b>Comic</b>', "Price": "<b>Price</b>", "partialsum": "<b>Partial Sum</b>", "Remove": "<b>Remove</b>"}
 		)
 	)
 	return thead;
@@ -114,6 +115,8 @@ Table.prototype.generateTable = function(highlight_whattobuy){
 		table.appendChild(this.generateHeader());
 		for (var i = 0; i < comics.length; i++) {
 			var row_ = this.generateRow(i+1, comics[i]);
+			if(indexesToHighlight.indexOf(i+1) != -1)
+				row_.className = 'comic-selected';
 			console.log(row_);
 			table.appendChild(row_);
 		}
