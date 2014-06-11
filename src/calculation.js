@@ -52,8 +52,7 @@ ComicList.prototype.whatICanBuy = function(maxPrice, options){
         return this.whatICanBuy(
             maxPrice,
             {
-                policy: "nopolicy",
-                notconsidernecessarycomics: false
+                policy: "nopolicy"
             }
             );
     }

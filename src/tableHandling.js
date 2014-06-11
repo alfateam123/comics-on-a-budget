@@ -105,7 +105,12 @@ Table.prototype.generateTable = function(highlight_whattobuy){
 	var comics=this.comiclist.getAllComics(), indexesToHighlight=[];
 	var maxprice = Number(document.getElementById('maxprice').value); 
 	if(highlight_whattobuy){
-		indexesToHighlight = this.comiclist.whatICanBuy(maxprice);	
+		indexesToHighlight = this.comiclist.whatICanBuy(
+			maxprice,
+			{
+                policy: document.getElementById("policyselector").value
+            }
+		);	
 		console.log("highlight_whattobuy, indexesToHighlight:", indexesToHighlight);
 	}
 	if(this.comiclist.getAllComics().length){
