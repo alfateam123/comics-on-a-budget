@@ -1,0 +1,26 @@
+{
+  "name": "comics-on-a-budget",
+  "version": "0.2.0",
+  "description": "A simple single-app application to help you save when you're in a bookstore",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alfateam123/comics-on-a-budget.git"
+  },
+  "author": "alfateam123@nospam.pls",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alfateam123/comics-on-a-budget/issues"
+  },
+  "homepage": "https://github.com/alfateam123/comics-on-a-budget#readme",
+  "devDependencies": {
+    "grunt-cli": "^1.2.0",
+    "grunt-serve": "^0.1.6"
+  }
+}
